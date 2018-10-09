@@ -1,9 +1,11 @@
-package com.example.ashish.jobintree;
+package com.example.ashish.jobintree.main.activities;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.ashish.jobintree.R;
 
 public class SplashActivity extends AppCompatActivity {
 
