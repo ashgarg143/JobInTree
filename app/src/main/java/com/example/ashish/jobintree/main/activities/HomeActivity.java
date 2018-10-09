@@ -1,4 +1,4 @@
-package com.example.ashish.jobintree;
+package com.example.ashish.jobintree.main.activities;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -6,6 +6,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.example.ashish.jobintree.R;
 
 public class HomeActivity extends AppCompatActivity {
 
