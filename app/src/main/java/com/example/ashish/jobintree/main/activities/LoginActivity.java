@@ -16,9 +16,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ashish.jobintree.R;
+import com.example.ashish.jobintree.main.rest.RetrofitClient;
 import com.msg91.sendotp.library.SendOtpVerification;
 import com.msg91.sendotp.library.Verification;
 import com.msg91.sendotp.library.VerificationListener;
+
+import org.json.JSONObject;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements VerificationListener {
 
@@ -76,7 +84,7 @@ public class LoginActivity extends AppCompatActivity implements VerificationList
                         verification = SendOtpVerification.createSmsVerification(
                                 SendOtpVerification.config("+91" + etLoginNumber.getText().toString())
                                         .context(LoginActivity.this)
-                                        .senderId("MMCHNE")
+                                        .senderId("JNTREE")
                                         .autoVerification(false)
                                         .build(), LoginActivity.this
                         );
@@ -263,7 +271,9 @@ public class LoginActivity extends AppCompatActivity implements VerificationList
     public void onVerified(String response) {
 
         otpprogressDialog.dismiss();
-        Toast.makeText(this, "login successful", Toast.LENGTH_SHORT).show();
+
+        login();
+       // Toast.makeText(this, "login successful", Toast.LENGTH_SHORT).show();
         /*final ProgressDialog progressDialog = new ProgressDialog(SignInActivity.this);
         otpprogressDialog.setMessage("Logging you in...");
         otpprogressDialog.setCancelable(false);
@@ -318,6 +328,56 @@ public class LoginActivity extends AppCompatActivity implements VerificationList
             }
         });*/
 
+    }
+
+    private void login() {
+        if (verifyOTPInput()) {
+            if (isNetworkAvailable()) {
+                final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
+                progressDialog.setMessage("Logging you in...");
+                progressDialog.setCanceledOnTouchOutside(false);
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+
+                Call<ResponseBody> responseBodyCall = RetrofitClient.getRetrofitClient()
+                        .connectUser()
+                        .login(etLoginNumber.getText().toString());
+                responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        progressDialog.dismiss();
+
+                        if(response.isSuccessful()){
+                            try {
+                                String s= response.body().string();
+
+                                if(s!=null){
+                                    JSONObject jsonObject = new JSONObject(s);
+                                    int status = jsonObject.getInt("status");
+                                    if(status == 200){
+                                        Toast.makeText(LoginActivity.this,jsonObject.getString("message") , Toast.LENGTH_SHORT).show();
+                                    } else if(status == 204){
+                                        Toast.makeText(LoginActivity.this,jsonObject.getString("message") , Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(LoginActivity.this,jsonObject.getString("message") , Toast.LENGTH_SHORT).show();
+
+                                    }
+                                }
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                    }
+                });
+            }
+        }
     }
 
     @Override

@@ -19,4 +19,20 @@ public class SharedPrefManager {
         }
         return sharedPrefManager;
     }
+
+    public void LoginUser(String name,String email,String phone){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("name",name);
+        editor.putString("email",email);
+        editor.putString("phone",phone);
+
+        editor.apply();
+    }
+
+    public String getName(){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        return sharedPreferences.getString("name",null);
+    }
 }

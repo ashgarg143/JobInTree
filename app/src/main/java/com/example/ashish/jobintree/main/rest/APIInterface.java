@@ -9,11 +9,13 @@ import retrofit2.http.POST;
 public interface APIInterface {
 
 
-    //signup 
+    //signup api path
     @FormUrlEncoded
     @POST("signup")
     Call<ResponseBody> signup(@Field("name") String name,@Field("email") String email,@Field("phone") String phone);
 
+    
+    //login api path
     @FormUrlEncoded
     @POST("login")
     Call<ResponseBody> login(@Field("phone") String phone);
