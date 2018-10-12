@@ -1,10 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main.activities.SignupActivity">
+    tools:context=".main.activities.SignupActivity"
+    android:background="@android:color/white">
+
+    <ScrollView
+        android:layout_marginTop="56dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:focusableInTouchMode="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="job in tree"
+                android:textAllCaps="true"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_marginTop="45dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Find jobs in most easiest way"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"/>
+
+            <EditText
+                android:id="@+id/et_signup_name"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="60dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:inputType="text"
+                android:hint="Enter your name"/>
+
+            <EditText
+                android:id="@+id/et_signup_email"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:inputType="textEmailAddress"
+                android:hint="Enter your email"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email already exists"
+                android:textColor="@android:color/holo_red_dark"
+                android:layout_marginLeft="48dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="8dp"
+                android:id="@+id/tv_signup_email_exists"
+                android:layout_marginBottom="12dp"
+                android:visibility="gone"
+                android:textSize="14sp"/>
+
+            <EditText
+                android:inputType="number"
+                android:id="@+id/et_signup_number"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:hint="Enter your number"/>
+
+            <EditText
+                android:visibility="gone"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:id="@+id/et_signup_otp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:paddingLeft="16dp"
+                android:maxLength="4"
+                android:paddingRight="16dp"
+                android:inputType="number"
+                android:hint="Enter your otp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="50dp">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_edit_text_green"
+                    android:text="Sign Up"
+                    android:textColor="@android:color/white"
+                    android:visibility="gone"
+                    android:id="@+id/bt_sign_up"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_edit_text_green"
+                    android:text="Request Otp"
+                    android:textColor="@android:color/white"
+                    android:id="@+id/bt_signup_request_otp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"/>
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="By signing up, you agree to our terms and conditions"
+                android:gravity="center"
+                android:textColor="@android:color/black"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 
 
