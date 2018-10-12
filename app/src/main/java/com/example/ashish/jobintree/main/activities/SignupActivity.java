@@ -2,7 +2,6 @@ package com.example.ashish.jobintree.main.activities;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -17,12 +16,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ashish.jobintree.R;
+import com.example.ashish.jobintree.main.rest.RetrofitClient;
 import com.msg91.sendotp.library.SendOtpVerification;
 import com.msg91.sendotp.library.Verification;
 import com.msg91.sendotp.library.VerificationListener;
 
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SignupActivity extends AppCompatActivity implements VerificationListener {
 
@@ -39,7 +47,10 @@ public class SignupActivity extends AppCompatActivity implements VerificationLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup); String number = getIntent().getStringExtra("number");
+        setContentView(R.layout.activity_signup);
+
+
+        String number = getIntent().getStringExtra("number");
 
         etSignupName = findViewById(R.id.et_signup_name);
         etSignupEmail = findViewById(R.id.et_signup_email);
@@ -85,7 +96,7 @@ public class SignupActivity extends AppCompatActivity implements VerificationLis
                         verification = SendOtpVerification.createSmsVerification(
                                 SendOtpVerification.config("+91" + etSignupNumber.getText().toString())
                                         .context(SignupActivity.this)
-                                        .senderId("MMCHNE")
+                                        .senderId("JNTREE")
                                         .autoVerification(false)
                                         .build(), SignupActivity.this
                         );
@@ -140,69 +151,55 @@ public class SignupActivity extends AppCompatActivity implements VerificationLis
         view.startAnimation(animation);
     }
 
-    /*private void signup() {
-        if (verifyOTPInput()){
-            if (isNetworkAvailable()){
-                final ProgressDialog progressDialog = new ProgressDialog(SignUpActivity.this);
+    private void signup() {
+        if (verifyOTPInput()) {
+            if (isNetworkAvailable()) {
+                final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this);
                 progressDialog.setMessage("Signing you up...");
                 progressDialog.setCanceledOnTouchOutside(false);
                 progressDialog.setCancelable(false);
                 progressDialog.show();
-                final DatabaseReference reference = FirebaseDatabase.getInstance()
-                        .getReference("users")
-                        .child(etSignupNumber.getText().toString());
-                reference.addValueEventListener(new ValueEventListener() {
+
+                Call<ResponseBody> responseBodyCall = RetrofitClient.getRetrofitClient()
+                        .connectUser()
+                        .signup(etSignupName.getText().toString(),etSignupEmail.getText().toString(),etSignupNumber.getText().toString());
+                responseBodyCall.enqueue(new Callback<ResponseBody>() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (!dataSnapshot.child("email").exists()){
-                            User user = new User(
-                                    etSignupName.getText().toString(),
-                                    etSignupEmail.getText().toString(),
-                                    etSignupNumber.getText().toString(),
-                                    "",
-                                    "No",
-                                    "Yes",
-                                    "Normal"
-                            );
-                            reference.setValue(user);
-                            String notProvided = "Not provided";
-                            DocumentImages images = new DocumentImages(notProvided,notProvided,notProvided,notProvided,notProvided,notProvided);
-                            reference.child("documentimages").setValue(images);
-                            progressDialog.dismiss();
-                            SharedPrefManager.getInstance(SignUpActivity.this)
-                                    .LoginUser(etSignupName.getText().toString(),
-                                            etSignupEmail.getText().toString(),
-                                            etSignupNumber.getText().toString(),
-                                            "",
-                                            "No",
-                                            "Yes"
-                                    );
-                            SharedPrefManager.getInstance(getBaseContext()).pancardfront(notProvided);
-                            SharedPrefManager.getInstance(getBaseContext()).pancardback(notProvided);
-                            SharedPrefManager.getInstance(getBaseContext()).aadharcardback(notProvided);
-                            SharedPrefManager.getInstance(getBaseContext()).aadharcardfront(notProvided);
-                            SharedPrefManager.getInstance(getBaseContext()).visitingcardback(notProvided);
-                            SharedPrefManager.getInstance(getBaseContext()).visitingcardback(notProvided);
-                            Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                        } else {
-                            progressDialog.dismiss();
-                            //tvEmailExists.setVisibility(View.VISIBLE);
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        progressDialog.dismiss();
+
+                        if(response.isSuccessful()){
+                            try {
+                                String s= response.body().string();
+
+                                if(s!=null){
+                                    JSONObject jsonObject = new JSONObject(s);
+                                    int status = jsonObject.getInt("status");
+                                    if(status == 200){
+                                        Toast.makeText(SignupActivity.this,jsonObject.getString("message") , Toast.LENGTH_SHORT).show();
+                                    } else if(status == 204){
+                                        Toast.makeText(SignupActivity.this,jsonObject.getString("message") , Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(SignupActivity.this,jsonObject.getString("message") , Toast.LENGTH_SHORT).show();
+
+                                    }
+                                }
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
+
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
 
                     }
                 });
-            } else {
-
             }
         }
-    }*/
+    }
 
     private String generateHash(String s) {
         int hash = 21;
@@ -287,7 +284,7 @@ public class SignupActivity extends AppCompatActivity implements VerificationLis
     @Override
     public void onVerified(String response) {
         otpProgress.dismiss();
-       // signup();
+        signup();
     }
 
     @Override
