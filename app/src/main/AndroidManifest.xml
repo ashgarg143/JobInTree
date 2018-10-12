@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ashish.jobintree">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/launcher"
@@ -9,6 +12,11 @@
         android:roundIcon="@drawable/launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="sendotp.key"
+            android:value="233650AmGm8ef0C45b811710" />
+
         <activity
             android:name=".main.activities.SplashActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -21,8 +29,14 @@
         <activity
             android:name=".main.activities.HomeActivity"
             android:label="@string/title_activity_home" />
-        <activity android:name=".main.activities.LoginActivity" />
-        <activity android:name=".main.activities.SignupActivity"></activity>
+        <activity android:name=".main.activities.LoginActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".main.activities.SignupActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+
+
+        </activity>
     </application>
 
 </manifest>
