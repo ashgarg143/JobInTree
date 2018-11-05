@@ -2,6 +2,7 @@ package com.example.ashish.jobintree.main.activities;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ashish.jobintree.R;
+import com.example.ashish.jobintree.main.SharedPrefManager;
 import com.example.ashish.jobintree.main.rest.RetrofitClient;
 import com.msg91.sendotp.library.SendOtpVerification;
 import com.msg91.sendotp.library.Verification;
@@ -160,9 +162,13 @@ public class SignupActivity extends AppCompatActivity implements VerificationLis
                 progressDialog.setCancelable(false);
                 progressDialog.show();
 
+                final String name = etSignupName.getText().toString();
+                final String email = etSignupEmail.getText().toString();
+                final String phone = etSignupNumber.getText().toString();
+
                 Call<ResponseBody> responseBodyCall = RetrofitClient.getRetrofitClient()
                         .connectUser()
-                        .signup(etSignupName.getText().toString(),etSignupEmail.getText().toString(),etSignupNumber.getText().toString());
+                        .signup(name,email,phone);
                 responseBodyCall.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -176,6 +182,11 @@ public class SignupActivity extends AppCompatActivity implements VerificationLis
                                     JSONObject jsonObject = new JSONObject(s);
                                     int status = jsonObject.getInt("status");
                                     if(status == 200){
+
+                                        SharedPrefManager.getInstance(getBaseContext())
+                                                .LoginUser(name,email,phone);
+                                        startActivity(new Intent(getBaseContext(),HomeActivity.class));
+                                        finish();
                                         Toast.makeText(SignupActivity.this,jsonObject.getString("message") , Toast.LENGTH_SHORT).show();
                                     } else if(status == 204){
                                         Toast.makeText(SignupActivity.this,jsonObject.getString("message") , Toast.LENGTH_SHORT).show();

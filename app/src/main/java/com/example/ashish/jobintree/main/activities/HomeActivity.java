@@ -1,16 +1,20 @@
 package com.example.ashish.jobintree.main.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.ashish.jobintree.R;
+import com.example.ashish.jobintree.main.SharedPrefManager;
 
 public class HomeActivity extends AppCompatActivity {
 
+    private static final String TAG = HomeActivity.class.getSimpleName();
     private TextView mTextMessage;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -36,6 +40,12 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.i(TAG, "onCreate: 1527652");
+        if(SharedPrefManager.getInstance(this).isLoggedIn() == null){
+            startActivity(new Intent(this,LoginActivity.class));
+            finish();
+        }
         setContentView(R.layout.activity_home);
 
         setTitle("Job in Tree");

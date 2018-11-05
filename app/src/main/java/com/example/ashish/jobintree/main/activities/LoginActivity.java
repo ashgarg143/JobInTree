@@ -3,10 +3,12 @@ package com.example.ashish.jobintree.main.activities;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -16,11 +18,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ashish.jobintree.R;
+import com.example.ashish.jobintree.main.SharedPrefManager;
 import com.example.ashish.jobintree.main.rest.RetrofitClient;
 import com.msg91.sendotp.library.SendOtpVerification;
 import com.msg91.sendotp.library.Verification;
 import com.msg91.sendotp.library.VerificationListener;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import okhttp3.ResponseBody;
@@ -30,6 +34,7 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements VerificationListener {
 
+    private static final String TAG = LoginActivity.class.getSimpleName();
     private EditText etLoginNumber, etLoginOtp;
     private Button btLogin,btLoginRequestOtp;
     Verification verification;
@@ -345,6 +350,7 @@ public class LoginActivity extends AppCompatActivity implements VerificationList
                 responseBodyCall.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        Log.i(TAG, "onResponse: 444444");
                         progressDialog.dismiss();
 
                         if(response.isSuccessful()){
@@ -355,8 +361,27 @@ public class LoginActivity extends AppCompatActivity implements VerificationList
                                     JSONObject jsonObject = new JSONObject(s);
                                     int status = jsonObject.getInt("status");
                                     if(status == 200){
+
+
+                                        JSONArray data = jsonObject.getJSONArray("data");
+
+                                        JSONObject object = data.getJSONObject(0);
+                                        String name = object.getString("name");
+                                        String email = object.getString("email");
+                                        String phone = object.getString("phone");
+
+                                        Log.i(TAG, "onResponse: " + name);
+                                        SharedPrefManager.getInstance(getBaseContext())
+                                                .LoginUser(name,email,phone);
+
+                                        startActivity(new Intent(LoginActivity.this,UploadResumeActivity.class));
+                                        finish();
+                                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
                                         Toast.makeText(LoginActivity.this,jsonObject.getString("message") , Toast.LENGTH_SHORT).show();
                                     } else if(status == 204){
+                                        startActivity(new Intent(getBaseContext(),SignupActivity.class));
+                                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                         Toast.makeText(LoginActivity.this,jsonObject.getString("message") , Toast.LENGTH_SHORT).show();
                                     } else {
                                         Toast.makeText(LoginActivity.this,jsonObject.getString("message") , Toast.LENGTH_SHORT).show();
@@ -373,7 +398,7 @@ public class LoginActivity extends AppCompatActivity implements VerificationList
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                        progressDialog.dismiss();
                     }
                 });
             }
