@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.animation.Animation;
@@ -36,6 +37,7 @@ import retrofit2.Response;
 
 public class SignupActivity extends AppCompatActivity implements VerificationListener {
 
+    private static String TAG = SignupActivity.class.getSimpleName();
     private EditText etSignupName, etSignupEmail, etSignupNumber, etSignUPOTP;
     private Button btSignup,btSignUpRequestOtp;
     TextView tvEmailExists;
@@ -93,6 +95,7 @@ public class SignupActivity extends AppCompatActivity implements VerificationLis
                     if(isNetworkAvailable()){
                         showView(etSignUPOTP);
                         hideView(btSignUpRequestOtp);
+                        etSignupNumber.setFocusable(false);
                         btSignup.setVisibility(View.VISIBLE);
                         //btSignup.setVisibility(View.VISIBLE);
                         verification = SendOtpVerification.createSmsVerification(
@@ -169,9 +172,17 @@ public class SignupActivity extends AppCompatActivity implements VerificationLis
                 Call<ResponseBody> responseBodyCall = RetrofitClient.getRetrofitClient()
                         .connectUser()
                         .signup(name,email,phone);
+
+                Log.i(TAG, "onResponse: 1111");
                 responseBodyCall.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                        Log.i(TAG, "onResponse: 2222");
+
+                        if(response.code() == 400){
+                            Log.i(TAG, "onResponse: error + " + response.errorBody());
+                        }
                         progressDialog.dismiss();
 
                         if(response.isSuccessful()){
@@ -205,7 +216,9 @@ public class SignupActivity extends AppCompatActivity implements VerificationLis
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                        Log.i(TAG, "onFailure: error response " + t.getMessage());
+                        Toast.makeText(SignupActivity.this, "failure", Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
                     }
                 });
             }
@@ -296,6 +309,10 @@ public class SignupActivity extends AppCompatActivity implements VerificationLis
     public void onVerified(String response) {
         otpProgress.dismiss();
         signup();
+       /* SharedPrefManager.getInstance(getBaseContext())
+                .LoginUser(etSignupNumber.getText().toString());
+        startActivity(new Intent(getBaseContext(),HomeActivity.class));
+        finish();*/
     }
 
     @Override

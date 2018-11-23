@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="4dp"
+    android:visibility="gone"
+    android:id="@+id/cl_single_vacancy_item_activity"
+    tools:context=".main.activities.SingleVacancyActivity">
+
+    <LinearLayout
+        android:layout_margin="12dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:textStyle="bold"
+            android:id="@+id/tv_vacancy_name_vacancy_item"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vacancy name"
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimary"/>
+
+        <TextView
+            android:id="@+id/tv_company_name_vacancy_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Company name"
+            android:textSize="19sp"
+            android:textColor="@color/black"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Location"
+                android:textSize="15.5sp"/>
+            <TextView
+                android:id="@+id/tv_location_vacancy_item"
+                android:textSize="15.5sp"
+                android:textColor="@android:color/black"
+                android:text=": Delhi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Salary"
+                android:textSize="15.5sp"/>
+            <TextView
+                android:id="@+id/tv_salary_vacancy_item"
+                android:textSize="15.5sp"
+                android:textColor="@android:color/black"
+                android:text=": 20000/- per month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Apply by"
+                android:textSize="15.5sp"/>
+            <TextView
+                android:id="@+id/tv_apply_by_vacancy_item"
+                android:textSize="15.5sp"
+                android:textColor="@android:color/black"
+                android:text=": December"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="About the company:"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:id="@+id/tv_company_detail_vacancy_item"
+            android:text="@string/sample_company_detail"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="About the Job:"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:id="@+id/tv_job_detail_vacancy_item"
+            android:text="@string/sample_job_detail"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Skill(s) Required:"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_skill_required_vacancy_item"
+            android:textSize="16sp"
+            android:text="@string/sample_skill_set"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Perks:"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_perks_vacancy_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="@string/sample_perks_data"/>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

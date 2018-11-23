@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:layout_marginTop="-30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/job2"/>
+
+            <TextView
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textAllCaps="true"
+                android:layout_marginTop="16dp"
+                android:text="Jobs in Popular cities"/>
+
+
+            <HorizontalScrollView
+                android:layout_marginRight="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_gurugram"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp">
+
+                        <ImageView
+                            android:scaleType="fitXY"
+                            android:src="@drawable/gurgaon"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <TextView
+                            android:paddingLeft="8dp"
+                            android:gravity="center"
+                            android:textSize="18sp"
+                            android:textAllCaps="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:text="Gurugram"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_delhi"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp">
+
+                        <ImageView
+                            android:scaleType="fitXY"
+                            android:src="@drawable/delhi_ncr"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <TextView
+                            android:paddingLeft="8dp"
+                            android:gravity="center"
+                            android:textSize="18sp"
+                            android:textAllCaps="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:text="Delhi"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_mumbai"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp">
+
+                        <ImageView
+                            android:scaleType="fitXY"
+                            android:src="@drawable/mumbai"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <TextView
+                            android:paddingLeft="8dp"
+                            android:gravity="center"
+                            android:textSize="18sp"
+                            android:textAllCaps="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:text="Mumbai"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_bangalore"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp">
+
+                        <ImageView
+                            android:scaleType="fitXY"
+                            android:src="@drawable/banglore"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <TextView
+                            android:paddingLeft="8dp"
+                            android:gravity="center"
+                            android:textSize="18sp"
+                            android:textAllCaps="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:text="Bangalore"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_hyderabad"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp">
+
+                        <ImageView
+                            android:scaleType="fitXY"
+                            android:src="@drawable/hyderabad"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <TextView
+                            android:paddingLeft="8dp"
+                            android:gravity="center"
+                            android:textSize="18sp"
+                            android:textAllCaps="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:text="Hyderabad"/>
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </HorizontalScrollView>
+
+            <TextView
+                android:layout_marginLeft="4dp"
+                android:text="Jobs in popular categories"
+                android:textAllCaps="true"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="4dp"/>
+
+            <HorizontalScrollView
+                android:layout_marginRight="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_app_development"
+                        android:layout_marginBottom="-10dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp">
+
+                        <ImageView
+                            android:scaleType="fitXY"
+                            android:src="@drawable/app"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <TextView
+                            android:gravity="center"
+                            android:textSize="18sp"
+                            android:textAllCaps="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:text="App Development"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_web_development"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp">
+
+                        <ImageView
+                            android:scaleType="fitXY"
+                            android:src="@drawable/web1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <TextView
+                            android:gravity="center"
+                            android:textSize="18sp"
+                            android:textAllCaps="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:text="Web Development"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_machine_learning"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp">
+
+                        <ImageView
+                            android:scaleType="fitXY"
+                            android:src="@drawable/machine_learning"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <TextView
+                            android:gravity="center"
+                            android:textSize="18sp"
+                            android:textAllCaps="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:text="Machine Learning"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_backend_development"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp">
+
+                        <ImageView
+                            android:scaleType="fitXY"
+                            android:src="@drawable/backend"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <TextView
+
+                            android:gravity="center"
+                            android:textSize="18sp"
+                            android:textAllCaps="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:text="Backend Development"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_designing"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp">
+
+                        <ImageView
+                            android:scaleType="fitXY"
+                            android:src="@drawable/media"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <TextView
+                            android:paddingLeft="8dp"
+                            android:gravity="center"
+                            android:textSize="18sp"
+                            android:textAllCaps="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:text="Designing"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/other_jobs"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp">
+
+                        <ImageView
+                            android:scaleType="fitXY"
+                            android:src="@drawable/other_jobs"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <TextView
+                            android:paddingLeft="8dp"
+                            android:gravity="center"
+                            android:textSize="18sp"
+                            android:textAllCaps="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:text="Other"/>
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </HorizontalScrollView>
+
+            <Button
+                android:textColor="@color/white"
+                android:id="@+id/bt_view_all_jobs"
+                android:layout_marginRight="4dp"
+                android:layout_marginLeft="4dp"
+                android:background="@color/colorPrimary"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="28dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="view all jobs"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

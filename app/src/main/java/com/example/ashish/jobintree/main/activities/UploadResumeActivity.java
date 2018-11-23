@@ -74,16 +74,17 @@ public class UploadResumeActivity extends AppCompatActivity {
 
         if(fileuri != null){
             final ProgressDialog dialog = new ProgressDialog(this);
-            dialog.setMessage("Uploading Resume");
+            dialog.setMessage("Uploading Resume...");
             dialog.setCancelable(false);
             dialog.setCanceledOnTouchOutside(false);
             dialog.show();
-
+            Log.i(TAG, "uploadToFirebase: 111");
 
             storageReference.putFile(fileuri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            SharedPrefManager.getInstance(UploadResumeActivity.this).uploadResume("Yes");
                             dialog.dismiss();
                             Toast.makeText(UploadResumeActivity.this, "Resume Uploaded Successfully", Toast.LENGTH_SHORT).show();
                             AlertDialog.Builder builder = new AlertDialog.Builder(UploadResumeActivity.this);

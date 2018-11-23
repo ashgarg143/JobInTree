@@ -3,5 +3,9 @@
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_account">Account</string>
+    <string name="sample_skill_set">Java, PHP, HTML, MongoDb</string>
+    <string name="sample_perks_data">Certificate, Letter of recommendation, Flexible work hours, 5 days a week</string>
+    <string name="sample_job_detail">MERN stack is the name given to a set of JavaScript based technologies used in developing web applications.</string>
+    <string name="sample_company_detail">Blackcoffer is an India and European Union (Malta) based enterprise software and analytics consulting firm founded by IIT alumni. We are data-driven, technology and decision science firm focused exclusively on big data analytics, data-driven dashboards, applications development, information management and consulting of any kind, from any source, at massive scale.</string>
 </resources>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e2e2e2"
+    tools:context=".main.activities.VacanciesActivity">
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+       <TextView
+           android:layout_centerHorizontal="true"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="No vacancy here!"
+           android:textSize="20sp"
+           android:layout_alignParentTop="true"
+           android:layout_marginTop="50dp"
+           android:visibility="visible"
+           android:id="@+id/tv_activity_vacancy_no_vacancy"
+           android:gravity="center"/>
+
+       <ProgressBar
+           android:layout_marginTop="120dp"
+           android:id="@+id/pb_activity_vacancy"
+           android:layout_centerInParent="true"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content" />
+
+       <TextView
+           android:textColor="#2F4F4F"
+           android:padding="8dp"
+           android:id="@+id/tv_showing_all_vacancies"
+           android:gravity="center"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="Showing All Vacancies"
+           android:textSize="18sp"
+           android:background="#d3d3d3"/>
+
+       <android.support.v7.widget.RecyclerView
+           android:layout_marginBottom="8dp"
+           android:layout_below="@id/tv_showing_all_vacancies"
+           android:id="@+id/rv_activity_vacancy_all_vacancies"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+
+       </android.support.v7.widget.RecyclerView>
+
+   </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

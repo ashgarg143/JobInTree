@@ -17,6 +17,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.ashish.jobintree.R;
 import com.example.ashish.jobintree.main.SharedPrefManager;
 import com.example.ashish.jobintree.main.rest.RetrofitClient;
@@ -27,14 +31,20 @@ import com.msg91.sendotp.library.VerificationListener;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.POST;
 
 public class LoginActivity extends AppCompatActivity implements VerificationListener {
 
     private static final String TAG = LoginActivity.class.getSimpleName();
+
+    private static final String BASE_URL ="https://13.251.185.41:8080/JobInTree-0.0.1-SNAPSHOT/";
+
     private EditText etLoginNumber, etLoginOtp;
     private Button btLogin,btLoginRequestOtp;
     Verification verification;
@@ -278,60 +288,12 @@ public class LoginActivity extends AppCompatActivity implements VerificationList
         otpprogressDialog.dismiss();
 
         login();
-       // Toast.makeText(this, "login successful", Toast.LENGTH_SHORT).show();
-        /*final ProgressDialog progressDialog = new ProgressDialog(SignInActivity.this);
-        otpprogressDialog.setMessage("Logging you in...");
-        otpprogressDialog.setCancelable(false);
-        otpprogressDialog.setCanceledOnTouchOutside(false);
-        DatabaseReference reference = FirebaseDatabase.getInstance()
-                .getReference("users")
-                .child(etLoginNumber.getText().toString());
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String name = dataSnapshot.child("name").getValue().toString();
-                String email = dataSnapshot.child("email").getValue().toString();
-                String number = dataSnapshot.child("number").getValue().toString();
-                String emailverified = dataSnapshot.child("emailverified").getValue().toString();
-                String alternatenumber = dataSnapshot.child("alternatenumber").getValue().toString();
-                // String companyname = dataSnapshot.child("companyname").getValue().toString();
-                // String address = dataSnapshot.child("address").getValue().toString();
-                String pancardfront = dataSnapshot.child("documentimages").child("pancardfront").getValue().toString();
-                String pancardback = dataSnapshot.child("documentimages").child("pancardback").getValue().toString();
-                String aadharcardfront = dataSnapshot.child("documentimages").child("aadharcardfront").getValue().toString();
-                String aadharcardback = dataSnapshot.child("documentimages").child("aadharcardback").getValue().toString();
-                String visitingcardfront = dataSnapshot.child("documentimages").child("visitingcardfront").getValue().toString();
-                String visitingcardback = dataSnapshot.child("documentimages").child("visitingcardback").getValue().toString();
+       /* SharedPrefManager.getInstance(getBaseContext())
+                .LoginUser(etLoginNumber.getText().toString());
 
-                SharedPrefManager.getInstance(SignInActivity.this).LoginUser(
-                        name,
-                        email,
-                        number,
-                        alternatenumber,
-                        emailverified,
-                        "Yes"
-
-                );
-
-                SharedPrefManager.getInstance(getBaseContext()).pancardfront(pancardfront);
-                SharedPrefManager.getInstance(getBaseContext()).pancardback(pancardback);
-                SharedPrefManager.getInstance(getBaseContext()).aadharcardfront(aadharcardfront);
-                SharedPrefManager.getInstance(getBaseContext()).aadharcardback(aadharcardback);
-                SharedPrefManager.getInstance(getBaseContext()).visitingcardfront(visitingcardfront);
-                SharedPrefManager.getInstance(getBaseContext()).visitingcardback(visitingcardback);
-                otpprogressDialog.dismiss();
-                Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
+        startActivity(new Intent(LoginActivity.this,UploadResumeActivity.class));
+        finish();
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);*/
 
     }
 
@@ -347,6 +309,8 @@ public class LoginActivity extends AppCompatActivity implements VerificationList
                 Call<ResponseBody> responseBodyCall = RetrofitClient.getRetrofitClient()
                         .connectUser()
                         .login(etLoginNumber.getText().toString());
+
+
                 responseBodyCall.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -398,9 +362,11 @@ public class LoginActivity extends AppCompatActivity implements VerificationList
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Toast.makeText(LoginActivity.this, "internet failure", Toast.LENGTH_LONG).show();
                         progressDialog.dismiss();
                     }
                 });
+
             }
         }
     }

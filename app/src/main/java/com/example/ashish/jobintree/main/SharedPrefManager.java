@@ -31,6 +31,23 @@ public class SharedPrefManager {
         editor.apply();
     }
 
+    public void uploadResume(String resume){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("resume",resume);
+        editor.apply();
+    }
+
+    /*public void LoginUser(String phone){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("phone",phone);
+
+        editor.apply();
+    }*/
+
     public String getName(){
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
         return sharedPreferences.getString("name",null);
@@ -49,5 +66,17 @@ public class SharedPrefManager {
     public String isLoggedIn(){
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
         return sharedPreferences.getString("phone",null);
+    }
+
+    public String isResumeUploaded(){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        return sharedPreferences.getString("resume",null);
+    }
+    public void Logout(){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.clear();
+        editor.apply();
     }
 }
